@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   patch '/customers/:id/hide' => "customers#hide"
   resources :cart_items,only: [:index,:create,:destroy,:update]
   delete '/cart_items' => "cart_items#reset"
-  get '/products/:genre_id/search' => "products#search"
-  resources :products,only: [:index,:show]
-  resources :shippings,only: [:new,:create,:edit,:update,:destroy]
+  get '/items/:genre_id/search' => "items#search"
+  resources :items,only: [:index,:show]
+  resources :addresses,only: [:new,:create,:edit,:update,:destroy]
   post '/orders/confirm' => "orders#confirm"
   get '/orders/complete' => "orders#complete"
   post '/orders/complete' => "orders#create"
