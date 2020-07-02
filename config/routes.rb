@@ -1,20 +1,23 @@
 Rails.application.routes.draw do
   devise_for :admins
   devise_for :customers
+  namespace :customers do
   resources :customers,only: [:show,:edit,:update]
   get '/customers/:id/leave' => "customers#leave"
   patch '/customers/:id/hide' => "customers#hide"
   resources :cart_items,only: [:index,:create,:destroy,:update]
   delete '/cart_items' => "cart_items#reset"
   get '/items/:genre_id/search' => "items#search"
-  resources :items,only: [:index,:show]
+  resources :items,only: [:index,:show,:new]
   resources :addresses,only: [:new,:create,:edit,:update,:destroy]
   post '/orders/confirm' => "orders#confirm"
   get '/orders/complete' => "orders#complete"
   post '/orders/complete' => "orders#create"
   resources :orders,only: [:new,:create,:index,:show]
+  end
   root to: 'home#top'
-  namespace :admin do
+
+  namespace :admins do
   	get '/' => "home#top"
   	resources :items,only: [:index,:new,:create,:show,:edit,:update]
   	resources :genres,only: [:index,:create,:edit,:update]
